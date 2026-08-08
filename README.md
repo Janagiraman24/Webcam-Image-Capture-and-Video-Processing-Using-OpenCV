@@ -41,6 +41,99 @@ Resize the frame and rotate it using OpenCV functions, then display the processe
 ---
 
 ## 💻 Program
+### 1. Import the required libraries.
+```
+import cv2
+import matplotlib.pyplot as plt
+from IPython.display import clear_output
+import time
+```
+### 2. Capture a frame from the webcam and save it as a JPG image.
+```
+cap = cv2.VideoCapture(0)
+
+ret, frame = cap.read()
+
+if ret:
+    cv2.imwrite("dipt2.jpg", frame)
+
+cap.release()
+```
+### 3. Read the captured image.
+```
+captured_image = cv2.imread("dipt2.jpg")
+```
+### 4. Display the captured image.
+```
+plt.imshow(captured_image[:, :, ::-1])
+plt.title("Captured Frame")
+plt.axis("off")
+plt.show()
+```
+### 5. Display the live webcam video.
+```
+cap = cv2.VideoCapture(0)
+
+for i in range(50):
+    ret, frame = cap.read()
+
+    if not ret:
+        break
+
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis("off")
+    plt.show()
+
+    time.sleep(0.05)
+
+cap.release()
+```
+### 6. Display the video after resizing.
+```
+cap = cv2.VideoCapture(0)
+for i in range(50):
+    ret, frame = cap.read()
+
+    if not ret:
+        break
+
+    resized_frame = cv2.resize(frame, (100, 150))
+
+    frame_rgb = cv2.cvtColor(resized_frame, cv2.COLOR_BGR2RGB)
+
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis("off")
+    plt.show()
+    time.sleep(0.05)
+
+cap.release()
+```
+### 7. Rotate the video by 90° clockwise and display it.
+```
+cap = cv2.VideoCapture(0)
+for i in range(50):
+    ret, frame = cap.read()
+
+    if not ret:
+        break
+
+    rotated_frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+
+    frame_rgb = cv2.cvtColor(rotated_frame, cv2.COLOR_BGR2RGB)
+
+    clear_output(wait=True)
+    plt.imshow(frame_rgb)
+    plt.axis("off")
+    plt.show()
+
+    time.sleep(0.05)
+
+cap.release()
+```
 
 ### Developed By:
 **Name:** JANAGIRAMAN M
